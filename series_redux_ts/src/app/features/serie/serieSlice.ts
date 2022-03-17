@@ -3,7 +3,7 @@ import { Category } from "../category/categorySlice"
 
 export interface Serie {
     title: String,
-    whatched: boolean,
+    watched: boolean,
     categories: Category[]
 };
 
@@ -15,12 +15,12 @@ const initialState: Series = {
     series: [
         {
             title: 'Game of Thrones',
-            whatched: true,
+            watched: true,
             categories: []
         },
         {
             title: 'Superman',
-            whatched: false,
+            watched: false,
             categories: []
         }
     ]
@@ -33,9 +33,13 @@ export const seriesSlice = createSlice({
         addSerie: (state, { payload }) => ({
             ...state,
             series: [...state.series, payload.data]
-        })
+        }),
+        changeSerie: (state, { payload }) => {
+            const index = state.series.findIndex(item => item.title === payload.title);
+            state.series[index].watched = payload.value;
+        }
     }
 })
 
-export const { addSerie } = seriesSlice.actions;
+export const { addSerie, changeSerie } = seriesSlice.actions;
 export default seriesSlice.reducer;
