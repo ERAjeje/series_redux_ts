@@ -8,13 +8,14 @@ const Pill = styled.span`
     color: white;
     height: 20px;
     margin: 10px;
+    cursor: pointer;
 `;
 
-export default ({ children, click, active: boolean }) => {
-    const [active, setActive] = useState(true)
-    const handleClick = () => {
-        click();
-        setActive(!active)
+export default ({ children, click, active = true }) => {
+    const [state, setState] = useState(active)
+    const handleClick = (e) => {
+        click(e.target.innerHTML);
+        setState(!state)
     }
-    return <Pill onClick={handleClick} active={active}>{children}</Pill>
+    return <Pill onClick={handleClick} active={state}>{children}</Pill>
 };
