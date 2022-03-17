@@ -10,7 +10,7 @@ export interface Categories {
 }
 
 const initialState: Categories = {
-    categories: []
+    categories: [{ title: 'Terror' }, { title: 'Aventura' }]
 }
 
 export const categoriesSlice = createSlice({
@@ -19,7 +19,7 @@ export const categoriesSlice = createSlice({
     reducers: {
         addCategory: (state, { payload }) => ({
             ...state,
-            categories: [...state.categories, payload.data]
+            categories: [...state.categories, ...payload.data]
         })
     }
 });
